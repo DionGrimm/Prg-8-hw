@@ -1,0 +1,7 @@
+car-div {
+    display:block;
+    position:absolute;
+    width:25px; height:25px;
+    background-color:blue;
+    transform:translate(40px, 20px)
+  }
