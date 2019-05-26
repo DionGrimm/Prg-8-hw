@@ -1,13 +1,34 @@
 "use strict";
-var Bomb = (function () {
-    function Bomb(g) {
-        var _this = this;
-        this.element = document.createElement("bomb");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var BasicObject = (function () {
+    function BasicObject(g) {
         this.game = g;
+    }
+    return BasicObject;
+}());
+var Bomb = (function (_super) {
+    __extends(Bomb, _super);
+    function Bomb(g) {
+        var _this = _super.call(this, g) || this;
+        _this.element = document.createElement("bomb");
         var foreground = document.getElementsByTagName("foreground")[0];
-        foreground.appendChild(this.element);
-        this.spawn();
-        this.element.addEventListener("click", function () { return _this.attack(); });
+        foreground.appendChild(_this.element);
+        _this.spawn();
+        _this.element.addEventListener("click", function () { return _this.attack(); });
+        _this.element.addEventListener("touchstart", function () { return _this.attack(); });
+        return _this;
     }
     Bomb.prototype.update = function () {
         this.move();
@@ -32,17 +53,19 @@ var Bomb = (function () {
         this.spawn();
     };
     return Bomb;
-}());
-var Car = (function () {
+}(BasicObject));
+var Car = (function (_super) {
+    __extends(Car, _super);
     function Car(g) {
-        this.speed = 3;
-        this.game = g;
-        this.element = document.createElement("car");
+        var _this = _super.call(this, g) || this;
+        _this.speed = 3;
+        _this.element = document.createElement("car");
         var foreground = document.getElementsByTagName("foreground")[0];
-        foreground.appendChild(this.element);
-        this.posx = 100;
-        this.posy = 600;
-        this.addClick();
+        foreground.appendChild(_this.element);
+        _this.posx = 100;
+        _this.posy = 600;
+        _this.addClick();
+        return _this;
     }
     Car.prototype.update = function () {
         this.drive();
@@ -57,9 +80,10 @@ var Car = (function () {
     Car.prototype.addClick = function () {
         var _this = this;
         this.element.addEventListener("click", function () { return _this.game.reset(); });
+        this.element.addEventListener("touchstart", function () { return _this.game.reset(); });
     };
     return Car;
-}());
+}(BasicObject));
 var Game = (function () {
     function Game() {
         this.score = 0;

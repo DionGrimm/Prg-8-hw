@@ -1,13 +1,13 @@
-class Car {
-    
-    private element: HTMLElement
+/// <reference path="basicObject.ts"/>
+
+class Car extends BasicObject {
+ 
     private posx:number
     private posy:number
-    private game:Game
     private speed:number = 3
         
     constructor(g:Game) {
-        this.game = g
+        super(g)
         this.element = document.createElement("car")
         let foreground = document.getElementsByTagName("foreground")[0]
         foreground.appendChild(this.element);
@@ -29,5 +29,6 @@ class Car {
 
     public addClick():void {
         this.element.addEventListener("click", () => this.game.reset())
+        this.element.addEventListener("touchstart", () => this.game.reset())
     }
 }

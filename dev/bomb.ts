@@ -1,18 +1,19 @@
-class Bomb {
+/// <reference path="basicObject.ts"/>
+
+class Bomb extends BasicObject {
     
-    private element:HTMLElement
-    private game:Game
     private posy:number
     private posx:number
     private speed:number
         
     constructor(g:Game) {
+        super(g)
         this.element = document.createElement("bomb")
-        this.game = g
         let foreground = document.getElementsByTagName("foreground")[0]
         foreground.appendChild(this.element);
         this.spawn()
         this.element.addEventListener("click", () => this.attack())
+        this.element.addEventListener("touchstart", () => this.attack())
     }
 
     public update():void {
